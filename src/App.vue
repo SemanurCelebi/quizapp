@@ -1,10 +1,6 @@
 <template>
 	<div id="app">
-		<h1>{{ message }}</h1>
-		<div>
-			<h2 class="text-xl font-medium text-black">Vue 3 ile Tailwind CSS</h2>
-			<p class="text-gray-500">Bu, Vue 3 ve Tailwind CSS kullanılarak oluşturulmuş bir örnek projedir.</p>
-		</div>
+		<router-view></router-view>
 	</div>
 </template>
 
@@ -12,7 +8,6 @@
 export default {
 	data() {
 		return {
-			message: 'Hello Vue 3!'
 		}
 	}
 }
