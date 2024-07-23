@@ -15,7 +15,7 @@ export default createStore({
             try {
                 const response = await axios.get('https://quizapi.io/api/v1/categories', {
                     headers: {
-                        'X-Api-Key': 'oGkVkpFobTu3EPaacJWtoxVAI3iDUWQvopa24lS1',
+                        'X-Api-Key': '',
                         'Content-Type': 'application/json'
                     }
                 })
