@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import config from '../config'
 
 export default createStore({
     state: {
@@ -15,7 +16,7 @@ export default createStore({
             try {
                 const response = await axios.get('https://quizapi.io/api/v1/categories', {
                     headers: {
-                        'X-Api-Key': '',
+                        'X-Api-Key': config.getApiToken(),
                         'Content-Type': 'application/json'
                     }
                 })
