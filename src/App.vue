@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
-		<div >Loading...</div>
-		<div >
+		<div v-if="data===null">Loading...</div>
+		<div v-else>
 			<router-view></router-view>
 		</div>
 	</div>
