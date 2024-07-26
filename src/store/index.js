@@ -20,6 +20,7 @@ export default createStore({
                 const response = await axios.get('https://66a3b48344aa6370458236cc.mockapi.io/api/key')
                         .then(response => response.data[0].key)
                 commit('setKey', response);
+                console.log("setKey", response);
             } catch (error) {
                 console.error('Error fetching key:', error);
                 throw error; // Re-throw the error if you want to handle it elsewhere
@@ -33,6 +34,7 @@ export default createStore({
                         'Content-Type': 'application/json'
                     }
                 })
+                console.log("setCategories", response.data)
                 commit('setCategories', response.data)
             } catch (error) {
                 console.error('Error fetching categories:', error)

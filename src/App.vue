@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
-		<div v-if="data===null">Loading...</div>
-		<div v-else>
+		<div >Loading...</div>
+		<div >
 			<router-view></router-view>
 		</div>
 	</div>
@@ -19,6 +19,7 @@ export default {
 			try {
 				await store.dispatch('getKey');
 				data.value = store.state.key;
+				console.log("getKey" , store.state.key);
 			} catch (error) {
 				console.error('Error fetching setup data:', error);
 			}
