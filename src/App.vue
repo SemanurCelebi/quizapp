@@ -1,14 +1,34 @@
 <template>
 	<div id="app">
-		<router-view></router-view>
+		<div v-if="data===null">Loading...</div>
+		<div v-else>
+			<router-view></router-view>
+		</div>
 	</div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { ref, onMounted } from 'vue';
 export default {
-	data() {
-		return {
-		}
+	setup() {
+		const store = useStore();
+		const data = ref(null);
+		
+		const fetchKey = async () => {
+			try {
+				await store.dispatch('getKey');
+				data.value = store.state.key;
+			} catch (error) {
+				console.error('Error fetching setup data:', error);
+			}
+		};
+		
+		// Fetch data when the component is created
+		 onMounted( () => {
+			 fetchKey();
+		});
+		return { data};
 	}
 }
 </script>
