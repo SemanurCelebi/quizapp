@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<div v-if="data===null">Loading...</div>
+		<div v-if="key === null">Loading...</div>
 		<div v-else>
 			<router-view></router-view>
 		</div>
@@ -8,28 +8,29 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
 import { ref, onMounted } from 'vue';
+import { useKeyStore } from './stores/key';
 export default {
 	setup() {
-		const store = useStore();
-		const data = ref(null);
+		const keyStore = useKeyStore();
+		const key = ref(null);
 		
 		const fetchKey = async () => {
 			try {
-				await store.dispatch('getKey');
-				data.value = store.state.key;
-				console.log("getKey" , store.state.key);
+				await keyStore.getKey();
+				key.value = keyStore.key;
+				console.log("getKey", keyStore.key);
 			} catch (error) {
 				console.error('Error fetching setup data:', error);
 			}
 		};
 		
 		// Fetch data when the component is created
-		 onMounted( () => {
-			 fetchKey();
+		onMounted(() => {
+			fetchKey();
 		});
-		return { data};
+		
+		return { key };
 	}
 }
 </script>
