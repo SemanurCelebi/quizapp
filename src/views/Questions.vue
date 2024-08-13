@@ -1,9 +1,9 @@
 <template>
-	<h1 class="text-4xl font-bold text-gray-800 mb-6">Questions</h1>
+	<h1 class="text-4xl font-bold text-gray-800 m-12">Questions</h1>
 	<div class="min-h-screen bg-gray-100 p-6">
-		<div v-if="questions.length" class="bg-white p-6 rounded-lg shadow-lg">
+		<div v-if="questions.length" class="bg-white p-8 py-14 rounded-lg shadow-lg">
 			<div>
-				<p class="mb-4">{{ questions[currentIndex].question }}</p>
+				<p class="mb-4 font-semibold">{{ questions[currentIndex].question }}</p>
 			</div>
 			<div class="space-y-4">
 				<label v-if="questions[currentIndex].answers.answer_a" class="flex items-center space-x-2">

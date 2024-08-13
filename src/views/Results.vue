@@ -1,5 +1,5 @@
 <template>
-	<h1 class="text-4xl font-bold text-gray-800 mb-6">Results</h1>
+	<h1 class="text-4xl font-bold text-gray-800 m-12">Results</h1>
 	<div class="min-h-screen bg-gray-100 p-6">
 		<div class="bg-white p-6 rounded-lg shadow-lg">
 			<div v-for="(question, index) in questions" :key="index" class="mb-4">
@@ -12,10 +12,10 @@
 				</p>
 			</div>
 		</div>
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pt-4">
 			<router-link
 					:to="{ name: 'categories' }"
-					class="text-lg font-semibold text-gray-800 bg-white p-4 rounded-lg shadow hover:bg-gray-200 transition">
+					class="text-lg font-semibold text-gray-800 bg-white p-6 rounded-lg shadow hover:bg-gray-200 transition">
 				Back to categories
 			</router-link>
 		</div>

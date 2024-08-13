@@ -1,12 +1,10 @@
 <template>
-	<h1 v-if="categories" class="text-4xl font-bold text-gray-800 mb-6">Categories</h1>
-	<div class="flex justify-center items-center min-h-screen bg-gray-100">
+	<h1 v-if="categories" class="text-4xl font-bold text-gray-800 m-12">Categories</h1>
+	<div class="flex justify-center items-center bg-gray-100 p-14">
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
-			<div v-for="category in categories" :key="category.id" class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-				<router-link :to="{ name: 'Questions', params: { category: category.name }}" class="text-lg font-semibold text-gray-800">
-					{{ category.name }}
-				</router-link>
-			</div>
+			<router-link v-for="category in categories" :key="category.id" :to="{ name: 'Questions', params: { category: category.name }}" class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+				<p class="text-lg font-semibold text-gray-800"> {{ category.name }}</p>
+			</router-link>
 		</div>
 	</div>
 </template>
