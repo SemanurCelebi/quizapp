@@ -8,16 +8,16 @@ export const useQuestionsStore = defineStore('questionsStore', {
         questions: [],
     }),
     actions: {
-        async fetchQuestions(category) {
+        async getQuestions() {
             const keyStore = useKeyStore();
             try {
                 const response = await axios.get('https://quizapi.io/api/v1/questions', {
                     headers: {
-                        'X-Api-Key': keyStore.key, // Diğer store'dan key alınıyor
+                        'X-Api-Key': keyStore.key,
                         'Content-Type': 'application/json'
                     }
                 });
-                this.questions = response.data.filter(question => question.category === category);
+                this.questions = response.data;
             } catch (error) {
                 console.error('Error fetching categories:', error);
             }

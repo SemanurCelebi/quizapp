@@ -22,17 +22,12 @@
 	</div>
 </template>
 
-<script>
-import { useRouter, useRoute } from 'vue-router';
+<script setup>
+import { useRoute } from 'vue-router';
 
-export default {
-	name: 'Results',
-	setup() {
-		const route = useRoute();
-		const questions = JSON.parse(route.query.questions || '[]');
-		const userAnswers = JSON.parse(route.query.userAnswers || '[]');
+const route = useRoute();
+const questions = JSON.parse(route.query.questions || '[]');
+const userAnswers = JSON.parse(route.query.userAnswers || '[]');
 		
-		return {questions, userAnswers};
-	},
-};
+
 </script>

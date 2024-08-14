@@ -10,10 +10,9 @@ export const useKeyStore = defineStore('keyStore', {
             try {
                 const response = await axios.get('https://66a3b48344aa6370458236cc.mockapi.io/api/key');
                 this.key = response.data[0].key;
-                console.log("setKey", this.key);
             } catch (error) {
                 console.error('Error fetching key:', error);
-                throw error; // Hata yönetimini başka bir yerde yapmak istersen hatayı yeniden fırlat
+                throw error;
             }
         },
     },

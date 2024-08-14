@@ -2,41 +2,33 @@
 	<h1 v-if="categories" class="text-4xl font-bold text-gray-800 m-12">Categories</h1>
 	<div class="flex justify-center items-center bg-gray-100 p-14">
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
-			<router-link v-for="category in categories" :key="category.id" :to="{ name: 'Questions', params: { category: category.name }}" class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-				<p class="text-lg font-semibold text-gray-800"> {{ category.name }}</p>
+			<router-link v-for="category in categories" :key="category.id" :to="{ name: 'Questions', params: { category: category }}" class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+				<p class="text-lg font-semibold text-gray-800"> {{ category }}</p>
 			</router-link>
 		</div>
 	</div>
 </template>
 
-<script>
+<script setup>
 import {onMounted, ref} from 'vue';
-import { useCategoryStore } from '@/stores/categories';
+import { useQuestionsStore } from '@/stores/questions'
 
-export default {
-	name: 'Categories',
-	setup() {
-		const categoryStore = useCategoryStore();
-		const categories = ref([]);
+
+const questionsStore = useQuestionsStore();
+const categories = ref([]);
 		
-		const getCategories = async () => {
-			try {
-				await categoryStore.fetchCategories();
-				categories.value = categoryStore.categories;
-				console.log("categories", categoryStore.categories);
-			} catch (error) {
-				console.error('Error fetching setup data:', error);
-			}
-		};
-		
-		// Fetch data when the component is created
-		onMounted(() => {
-			getCategories();
-		});
-		
-		return {categories}
-		
-	},
+const getQuestionsCategory = async () => {
+	try {
+		categories.value = [...new Set(questionsStore.questions.map(item => item.category).filter(category => category))];
+	} catch (error) {
+		console.error('Error fetching setup data:', error);
+	}
 };
+		
+onMounted(async() => {
+	await questionsStore.getQuestions();
+	await getQuestionsCategory();
+});
+
 </script>
 

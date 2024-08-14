@@ -7,32 +7,26 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue';
 import { useKeyStore } from './stores/key';
-export default {
-	setup() {
-		const keyStore = useKeyStore();
-		const key = ref(null);
+const keyStore = useKeyStore();
+const key = ref(null);
 		
-		const fetchKey = async () => {
-			try {
-				await keyStore.getKey();
-				key.value = keyStore.key;
-				console.log("getKey", keyStore.key);
-			} catch (error) {
-				console.error('Error fetching setup data:', error);
-			}
-		};
-		
-		// Fetch data when the component is created
-		onMounted(() => {
-			fetchKey();
-		});
-		
-		return { key };
+const fetchKey = async () => {
+	try {
+		await keyStore.getKey();
+		key.value = keyStore.key;
+	} catch (error) {
+		console.error('Error fetching setup data:', error);
 	}
-}
+};
+		
+
+onMounted(() => {
+	fetchKey();
+});
+
 </script>
 
 <style>

@@ -41,58 +41,51 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import { onMounted, ref } from 'vue';
 import { useQuestionsStore } from '@/stores/questions';
 import { useRouter } from 'vue-router';
-
-export default {
-	name: 'Questions',
-	props: {
-		category: {
-			type: String,
-			required: true
-		}
-	},
-	setup( props ) {
-		const questionStore = useQuestionsStore();
-		const questions = ref([]);
-		const currentIndex = ref(0);
-		const userAnswers = ref([]);
-		const router = useRouter();
+const props = defineProps({
+	category: {
+		type: String,
+		required: true
+	}
+})
+const questionStore = useQuestionsStore();
+const questions = ref([]);
+const currentIndex = ref(0);
+const userAnswers = ref([]);
+const router = useRouter();
 		
 		
-		const getQuestions = async (category) => {
-			try {
-				await questionStore.fetchQuestions(category);
-				questions.value = questionStore.questions;
-				console.log("sorular", questionStore.questions);
-			} catch (error) {
-				console.error('Error fetching setup data:', error);
-			}
-		};
-		
-		const nextQuestion = () => {
-			if (currentIndex.value < questions.value.length - 1) {
-				currentIndex.value++;
-			}
-		};
-		
-		const showResults = () => {
-			router.push({
-				name: 'Results',
-				query: {
-					questions: JSON.stringify(questions.value),
-					userAnswers: JSON.stringify(userAnswers.value)
-				}
-			});
-		};
-		
-		onMounted(() => {
-			getQuestions(props.category);
-		});
-		
-		return { questions, currentIndex, userAnswers, nextQuestion, showResults };
-	},
+const getQuestions = async (category) => {
+	try {
+		questions.value = questionStore.questions.filter(question => question.category === category);
+		console.log(questions.value);
+	} catch (error) {
+		console.error('Error fetching setup data:', error);
+	}
 };
+		
+const nextQuestion = () => {
+	if (currentIndex.value < questions.value.length - 1) {
+		currentIndex.value++;
+	}
+};
+		
+const showResults = () => {
+	router.push({
+		name: 'Results',
+		query: {
+			questions: JSON.stringify(questions.value),
+			userAnswers: JSON.stringify(userAnswers.value)
+		}
+	});
+};
+		
+onMounted(() => {
+	getQuestions(props.category);
+});
+		
+
 </script>
