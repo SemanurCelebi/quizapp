@@ -6,23 +6,33 @@
 				<p class="mb-4 font-semibold">{{ questions[currentIndex].question }}</p>
 			</div>
 			<div class="space-y-4">
-				<label v-if="questions[currentIndex].answers.answer_a" class="flex items-center space-x-2">
-					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_a" class="form-radio" />
-					<span>{{ questions[currentIndex].answers.answer_a }}</span>
-				</label>
-				<label v-if="questions[currentIndex].answers.answer_b" class="flex items-center space-x-2">
-					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_b" class="form-radio" />
-					<span>{{ questions[currentIndex].answers.answer_b }}</span>
-				</label>
-				<label v-if="questions[currentIndex].answers.answer_c" class="flex items-center space-x-2">
-					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_c" class="form-radio" />
-					<span>{{ questions[currentIndex].answers.answer_c }}</span>
-				</label>
-				<label v-if="questions[currentIndex].answers.answer_d" class="flex items-center space-x-2">
-					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_d" class="form-radio" />
-					<span>{{ questions[currentIndex].answers.answer_d }}</span>
+				<label
+						v-for="([key, answer], index) in Object.entries(questions[currentIndex].answers).filter(([key, answer]) => answer)"
+						:key="index"
+						class="flex items-center space-x-2"
+				>
+					<input type="radio" v-model="userAnswers[currentIndex]" :value="key" class="form-radio" />
+					<span>{{ answer }}</span>
 				</label>
 			</div>
+<!--			<div class="space-y-4">-->
+<!--				<label v-if="questions[currentIndex].answers.answer_a" class="flex items-center space-x-2">-->
+<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_a" class="form-radio" />-->
+<!--					<span>{{ questions[currentIndex].answers.answer_a }}</span>-->
+<!--				</label>-->
+<!--				<label v-if="questions[currentIndex].answers.answer_b" class="flex items-center space-x-2">-->
+<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_b" class="form-radio" />-->
+<!--					<span>{{ questions[currentIndex].answers.answer_b }}</span>-->
+<!--				</label>-->
+<!--				<label v-if="questions[currentIndex].answers.answer_c" class="flex items-center space-x-2">-->
+<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_c" class="form-radio" />-->
+<!--					<span>{{ questions[currentIndex].answers.answer_c }}</span>-->
+<!--				</label>-->
+<!--				<label v-if="questions[currentIndex].answers.answer_d" class="flex items-center space-x-2">-->
+<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_d" class="form-radio" />-->
+<!--					<span>{{ questions[currentIndex].answers.answer_d }}</span>-->
+<!--				</label>-->
+<!--			</div>-->
 			<div class="mt-4 flex justify-center">
 				<button
 						@click="prevQuestion"
@@ -51,7 +61,7 @@
 			<router-link
 					:to="{ name: 'categories' }"
 					class="text-lg font-semibold text-gray-800 bg-white p-6 rounded-lg shadow hover:bg-gray-200 transition">
-				Exit Quiz
+					{{ questions.length ? 'Exit Quiz' : 'No questions please go back to categories' }}
 			</router-link>
 		</div>
 	</div>
@@ -72,10 +82,11 @@ const questions = ref([]);
 const currentIndex = ref(0);
 const userAnswers = ref([]);
 const router = useRouter();
-		
+
 		
 const getQuestions = async (category) => {
 	try {
+		console.log("soru", questionStore.questions)
 		questions.value = questionStore.questions.filter(question => question.category === category);
 		console.log("sorular", questions.value);
 	} catch (error) {

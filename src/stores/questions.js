@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { useKeyStore } from './key'
+import { useKeyStore } from './authentication'
 
 
 export const useQuestionsStore = defineStore('questionsStore', {

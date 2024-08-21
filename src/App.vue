@@ -9,7 +9,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useKeyStore } from './stores/key';
+import { useKeyStore } from './stores/authentication';
 const keyStore = useKeyStore();
 const key = ref(null);
 		
