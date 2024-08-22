@@ -47,6 +47,7 @@
 			</router-link>
 		</div>
 	</div>
+	<Loader v-else/>
 </template>
 
 <script setup>

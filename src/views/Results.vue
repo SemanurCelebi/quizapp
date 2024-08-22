@@ -23,9 +23,7 @@
 			</router-link>
 		</div>
 	</div>
-	<div v-else>
-		<p>Loading...</p>
-	</div>
+	<Loader v-else/>
 </template>
 
 <script setup>

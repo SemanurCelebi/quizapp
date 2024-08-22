@@ -1,9 +1,9 @@
 <template>
 	<div id="app" class="text-center">
-		<div v-if="key === null">Loading...</div>
-		<div v-else>
+		<div v-if="key">
 			<router-view></router-view>
 		</div>
+		<Loader v-else/>
 	</div>
 </template>
 
