@@ -4,7 +4,6 @@
 				class="img"
 				src="../assets/images/loading.gif"
 				alt="loading..."
-				width="200"
 		/>
 	</div>
 </template>

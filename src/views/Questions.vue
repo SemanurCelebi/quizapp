@@ -70,7 +70,9 @@ const router = useRouter();
 		
 const getQuestions = async (category) => {
 	try {
-		questions.value = questionStore.questions.filter(question => question.category === category)
+		questions.value = questionStore.questions
+				.filter(question => question.correct_answer)
+				.filter(question => question.category === category)
 				.map(question => ({
 					question: question.question,
 					answers: question.answers,
