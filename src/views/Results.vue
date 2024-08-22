@@ -1,6 +1,6 @@
 <template>
 	<h1 class="text-4xl font-bold text-gray-800 m-12">Results</h1>
-	<div class="min-h-screen bg-gray-100 p-6">
+	<div class="min-h-screen bg-gray-100 p-6" v-if="questions.length > 0 && userAnswers.length > 0">
 		<div class="bg-white p-6 rounded-lg shadow-lg mb-6">
 			<p class="text-lg font-semibold">Your score: {{ correctPercentage }}%</p>
 		</div>
@@ -23,15 +23,20 @@
 			</router-link>
 		</div>
 	</div>
+	<div v-else>
+		<p>Loading...</p>
+	</div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
 import {computed} from "vue";
 
-const route = useRoute();
-const questions = JSON.parse(route.query.questions || '[]');
-const userAnswers = JSON.parse(route.query.userAnswers || '[]');
+import { useQuestionsStore } from '@/stores/questions';
+
+const questionStore = useQuestionsStore();
+
+const questions = questionStore.selectedQuestions;
+const userAnswers = questionStore.userAnswers;
 		
 
 const correctCount = computed(() => {

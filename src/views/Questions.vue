@@ -1,7 +1,7 @@
 <template>
 	<h1 class="text-4xl font-bold text-gray-800 m-12">Questions</h1>
-	<div class="min-h-screen bg-gray-100 p-6">
-		<div v-if="questions.length" class="bg-white p-8 py-14 rounded-lg shadow-lg">
+	<div v-if="questions.length" class="min-h-screen bg-gray-100 p-6">
+		<div class="bg-white p-8 py-14 rounded-lg shadow-lg">
 			<div class="flex justify-between">
 				<p class="mb-4 font-semibold">{{ questions[currentIndex].question }}</p>
 			</div>
@@ -15,24 +15,6 @@
 					<span>{{ answer }}</span>
 				</label>
 			</div>
-<!--			<div class="space-y-4">-->
-<!--				<label v-if="questions[currentIndex].answers.answer_a" class="flex items-center space-x-2">-->
-<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_a" class="form-radio" />-->
-<!--					<span>{{ questions[currentIndex].answers.answer_a }}</span>-->
-<!--				</label>-->
-<!--				<label v-if="questions[currentIndex].answers.answer_b" class="flex items-center space-x-2">-->
-<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_b" class="form-radio" />-->
-<!--					<span>{{ questions[currentIndex].answers.answer_b }}</span>-->
-<!--				</label>-->
-<!--				<label v-if="questions[currentIndex].answers.answer_c" class="flex items-center space-x-2">-->
-<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_c" class="form-radio" />-->
-<!--					<span>{{ questions[currentIndex].answers.answer_c }}</span>-->
-<!--				</label>-->
-<!--				<label v-if="questions[currentIndex].answers.answer_d" class="flex items-center space-x-2">-->
-<!--					<input type="radio" v-model="userAnswers[currentIndex]" value="answer_d" class="form-radio" />-->
-<!--					<span>{{ questions[currentIndex].answers.answer_d }}</span>-->
-<!--				</label>-->
-<!--			</div>-->
 			<div class="mt-4 flex justify-center">
 				<button
 						@click="prevQuestion"
@@ -78,6 +60,7 @@ const props = defineProps({
 	}
 })
 const questionStore = useQuestionsStore();
+
 const questions = ref([]);
 const currentIndex = ref(0);
 const userAnswers = ref([]);
@@ -86,9 +69,13 @@ const router = useRouter();
 		
 const getQuestions = async (category) => {
 	try {
-		console.log("soru", questionStore.questions)
-		questions.value = questionStore.questions.filter(question => question.category === category);
-		console.log("sorular", questions.value);
+		questions.value = questionStore.questions.filter(question => question.category === category)
+				.map(question => ({
+					question: question.question,
+					answers: question.answers,
+					correct_answer: question.correct_answer
+				}));
+		questionStore.setSelectedQuestions(questions.value)
 	} catch (error) {
 		console.error('Error fetching setup data:', error);
 	}
@@ -106,13 +93,9 @@ const nextQuestion = () => {
 };
 		
 const showResults = () => {
-	router.push({
-		name: 'Results',
-		query: {
-			questions: JSON.stringify(questions.value),
-			userAnswers: JSON.stringify(userAnswers.value)
-		}
-	});
+	router.push({name: 'Results'});
+	questionStore.setUserAnswers(userAnswers.value);
+	
 };
 		
 onMounted(() => {

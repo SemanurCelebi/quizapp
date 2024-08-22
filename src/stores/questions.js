@@ -6,8 +6,16 @@ import { useKeyStore } from './authentication'
 export const useQuestionsStore = defineStore('questionsStore', {
     state: () => ({
         questions: [],
+        selectedQuestions: [],
+        userAnswers: []
     }),
     actions: {
+        setSelectedQuestions(questions) {
+            this.selectedQuestions = questions;
+        },
+        setUserAnswers(answer) {
+            this.userAnswers = answer;
+        },
         async getQuestions() {
             const keyStore = useKeyStore();
             try {
