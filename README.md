@@ -1,8 +1,8 @@
 # QuizApp
 
-<img width="500" alt="Screenshot 2025-02-11 at 16 04 07" src="https://github.com/user-attachments/assets/fe5c8f15-76cf-4b1d-a851-0e3c5bc4004c" />
-<img width="700" alt="Screenshot 2025-02-11 at 16 10 08" src="https://github.com/user-attachments/assets/548ca96d-5a3c-4d81-88fc-7fbe0a84b5c8" />
-<img width="500" alt="Screenshot 2025-02-11 at 16 10 54" src="https://github.com/user-attachments/assets/29249ab7-d622-4a4b-858c-1f6e9d733902" />
+<img width="600" alt="Screenshot 2025-02-11 at 16 04 07" src="https://github.com/user-attachments/assets/fe5c8f15-76cf-4b1d-a851-0e3c5bc4004c" />
+<img width="600" alt="Screenshot 2025-02-11 at 16 10 08" src="https://github.com/user-attachments/assets/548ca96d-5a3c-4d81-88fc-7fbe0a84b5c8" />
+<img width="600" alt="Screenshot 2025-02-11 at 16 10 54" src="https://github.com/user-attachments/assets/29249ab7-d622-4a4b-858c-1f6e9d733902" />
 
 
 
