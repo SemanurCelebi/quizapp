@@ -58,7 +58,7 @@ npm run build
 
 ---
 
-# Author Info
+## Author Info
 
 - Linkedin - [Semanur Çelebi](https://www.linkedin.com/in/semanurcelebi/)
 - Mail     - [Semanur Çelebi](mailto:semanur.celebi@outlook.com)
