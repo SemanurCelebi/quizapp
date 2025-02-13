@@ -7,11 +7,11 @@
 		<div class="bg-white p-6 rounded-lg shadow-lg">
 			<div v-for="(question, index) in questions" :key="index" class="mb-4">
 				<p class="font-semibold">{{ question.question }}</p>
-				<p :class="{'text-green-500': userAnswers[index] === question.correct_answer, 'text-red-500': userAnswers[index] !== question.correct_answer}">
+				<p :class="{'text-green-500': userAnswers[index] === question.correct_answer[0], 'text-red-500': userAnswers[index] !== question.correct_answer[0]}">
 					Your answer: {{ question.answers[userAnswers[index]] }}
 				</p>
-				<p v-if="userAnswers[index] !== question.correct_answer" class="text-blue-500">
-					Correct answer: {{ question.answers[question.correct_answer] }}
+				<p v-if="userAnswers[index] !== question.correct_answer[0]" class="text-blue-500">
+					Correct answer: {{ question.answers[question.correct_answer[0]] }}
 				</p>
 			</div>
 		</div>
@@ -38,7 +38,7 @@ const userAnswers = questionStore.userAnswers;
 		
 
 const correctCount = computed(() => {
-	return questions.filter((question, index) => userAnswers[index] === question.correct_answer).length;
+	return questions.filter((question, index) => userAnswers[index] === question.correct_answer[0]).length;
 });
 
 const correctPercentage = computed(() => {

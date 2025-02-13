@@ -71,12 +71,15 @@ const router = useRouter();
 const getQuestions = async (category) => {
 	try {
 		questions.value = questionStore.questions
-				.filter(question => question.correct_answer)
-				.filter(question => question.category === category)
+				.filter(question => question.category === category &&
+						Object.values(question.correct_answers).includes("true")
+				)
 				.map(question => ({
 					question: question.question,
 					answers: question.answers,
-					correct_answer: question.correct_answer
+					correct_answer: Object.entries(question.correct_answers)
+							.filter(([_, value]) => value === "true")
+							.map(([key, _]) => key.replace("_correct", ""))
 				}));
 		questionStore.setSelectedQuestions(questions.value)
 	} catch (error) {
