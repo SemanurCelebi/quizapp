@@ -7,6 +7,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test",
+    "test:unit": "vitest",
+    "test:unit:run": "vitest run",
+    "test:unit:watch": "vitest --watch",
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
@@ -19,6 +22,13 @@
     "vue-router": "^4.0.13"
   },
   "devDependencies": {
-    "@vue/cli-service": "^5.0.8"
+    "@vue/cli-service": "^5.0.8",
+    "vitest": "^1.2.1",
+    "jsdom": "^21.1.1"
+  }
+  ,
+  "vitest": {
+    "setupFiles": ["./tests/setupTests.js"],
+    "environment": "jsdom"
   }
 }
